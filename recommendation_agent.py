@@ -13,13 +13,16 @@ from langchain.chains import LLMChain
 from langchain.chains.conversational_retrieval.prompts import CONDENSE_QUESTION_PROMPT
 from langchain.chains.question_answering import load_qa_chain
 from langchain import PromptTemplate
+from transformers import pipeline
+
 
 
 
 # Please ensure you have a .env file available with 'HUGGINGFACEHUB_API_TOKEN'
 load_dotenv(find_dotenv())
-HUGGINGFACEHUB_API_TOKEN ="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"
-os.environ["HUGGINGFACEHUB_API_TOKEN"] = HUGGINGFACEHUB_API_TOKEN
+# HUGGINGFACEHUB_API_TOKEN ="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"
+# os.environ["HUGGINGFACEHUB_API_TOKEN"] = HUGGINGFACEHUB_API_TOKEN
+HUGGINGFACEHUB_API_TOKEN  = os.environ["HUGGINGFACEHUB_API_TOKEN"]
 
 repo_id ="mistralai/Mistral-7B-Instruct-v0.2"
 def choose_model2(model):
@@ -83,5 +86,17 @@ def recommend2(query):
     print("this is the response from AI Bot:",result["answer"])
 
     return result["answer"]
+
+def is_depressed(human_inputs):
+    ''''
+    returns wether according to human inputs the person is depressed or not
+    '''
+    # Implement Classification
+    # all_user_inputs = ''.join(human_inputs)
+    pipe = pipeline('sentiment-analysis')
+    status = pipe(human_inputs)
+    return 'Is depressed' if status[0]["label"] == "NEGATIVE" else ' not Depressed'
+    # return status[0]["label"]
+
 
 # print(recommend2("i am feeling sad"))

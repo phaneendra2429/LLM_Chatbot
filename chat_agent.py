@@ -17,8 +17,9 @@ from langchain.chains import LLMChain, ConversationChain
 
 # Please ensure you have a .env file available with 'HUGGINGFACEHUB_API_TOKEN'
 load_dotenv(find_dotenv())
-HUGGINGFACEHUB_API_TOKEN ="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"
-os.environ["HUGGINGFACEHUB_API_TOKEN"] = HUGGINGFACEHUB_API_TOKEN
+# HUGGINGFACEHUB_API_TOKEN ="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"
+# os.environ["HUGGINGFACEHUB_API_TOKEN"] = HUGGINGFACEHUB_API_TOKEN
+HUGGINGFACEHUB_API_TOKEN  = os.environ["HUGGINGFACEHUB_API_TOKEN"]
 
 repo_id ="mistralai/Mistral-7B-Instruct-v0.2"
 def choose_model1(model):

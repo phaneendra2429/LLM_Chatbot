@@ -5,7 +5,7 @@ from llama_guard import moderate_chat, get_category_name
 #added on March 24th
 import time
 from chat_agent import convo, choose_model1
-from recommendation_agent import recommend2, choose_model2
+from recommendation_agent import recommend2, choose_model2, is_depressed
 from functools import cached_property
 
 
@@ -31,6 +31,7 @@ def update_recommendations(sum):
     #     recommend = recommend2(sum)
     #     st.write(recommend)  # Update the content with new_content
     with st.sidebar:
+        st.write("User Status:",is_depressed(sum))
         st.header("Mental Health Advice")
         recommend = recommend2(sum)  # Assuming recommend2 doesn't require input
         st.write(recommend)
