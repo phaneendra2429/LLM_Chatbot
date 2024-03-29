@@ -18,9 +18,19 @@ from langchain import PromptTemplate
 
 # Please ensure you have a .env file available with 'HUGGINGFACEHUB_API_TOKEN'
 load_dotenv(find_dotenv())
-HUGGINGFACEHUB_API_TOKEN  = os.environ["HUGGINGFACEHUB_API_TOKEN"]
+HUGGINGFACEHUB_API_TOKEN ="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"
+os.environ["HUGGINGFACEHUB_API_TOKEN"] = HUGGINGFACEHUB_API_TOKEN
 
-repo_id="mistralai/Mistral-7B-Instruct-v0.2"
+repo_id ="mistralai/Mistral-7B-Instruct-v0.2"
+def choose_model2(model):
+    global repo_id
+    if model == "Venilla Model":
+        repo_id="mistralai/Mistral-7B-Instruct-v0.2"
+        print("model chooosed from recomm",repo_id)
+    else:
+        repo_id="GRMenon/mental-health-mistral-7b-instructv0.2-finetuned-V2"
+        print("model chooosed from recomm",repo_id)
+
 llm = HuggingFaceEndpoint(
     repo_id=repo_id, max_length=512, temperature=0.5, token=HUGGINGFACEHUB_API_TOKEN
 )

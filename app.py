@@ -4,8 +4,8 @@ from llm_generator import llm_generation
 from llama_guard import moderate_chat, get_category_name
 #added on March 24th
 import time
-from chat_agent import convo
-from recommendation_agent import recommend2
+from chat_agent import convo, choose_model1
+from recommendation_agent import recommend2, choose_model2
 from functools import cached_property
 
 
@@ -20,6 +20,10 @@ st.title('Mental Health Counseling Chatbot')
 # Adjust sidebar width to take half the screen
 col1, col2 = st.columns([2, 3])
 
+model = st.sidebar.selectbox(label="Choose the LLM model", options=["Venilla Model", "Fine Tuned Model"])
+print("\n\nSelected model from Dropdown",model)
+choose_model1(model)
+choose_model2(model)
 # Function to update recommendations in col1
 def update_recommendations(sum):
     # with col1:
@@ -30,7 +34,7 @@ def update_recommendations(sum):
         st.header("Mental Health Advice")
         recommend = recommend2(sum)  # Assuming recommend2 doesn't require input
         st.write(recommend)
-    
+        
         # Add refresh button (simulated)
         if st.button("Refresh Chat"):
             st.rerun()
